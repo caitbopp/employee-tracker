@@ -1,5 +1,5 @@
 const inquirer = require("inquirer");
-const { findAllEmployees, employeesByDepartment, employeesByManager } = require("./db/queries");
+// const { findAllEmployees, employeesByDepartment, employeesByManager } = require("./db/queries");
 const db = require("./db/queries");
 const connection = require("./db/connection");
 
