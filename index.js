@@ -14,14 +14,12 @@ const runSearch = () => {
             choices: [
                 'View all employees',
                 'View all roles',
-                'View all employees by department',
-                // 'View all employees by manager',
                 'View all departments',
                 'Add department',
+                'Add role',
                 'Add employee',
-                // 'Remove employee',
                 'Update employee role',
-                // 'Update employee manager'
+                // 'View all employees by department',
             ],
         })
         .then((answer) => {
@@ -34,14 +32,6 @@ const runSearch = () => {
                     viewRoles();
                     break;
 
-                case 'View all employees by department':
-                    viewEmployeesDepartment();
-                    break;
-
-                case 'View all employees by manager':
-                    viewEmployeesManager();
-                    break;
-
                 case 'View all departments':
                     viewDepartment();
                     break;
@@ -50,13 +40,25 @@ const runSearch = () => {
                     addDepartment();
                     break;
 
+                case 'Add role':
+                    addRole();
+                    break;
+
                 case 'Add employee':
                     addEmployee();
                     break;
-                
+
                 case 'Update employee role':
                     // updateEmployeeRole();
                     break;
+
+                // case 'View all employees by department':
+                //     viewEmployeesDepartment();
+                //     break;
+
+                // case 'View all employees by manager':
+                //     viewEmployeesManager();
+                //     break;
 
                 // case 'Remove employee':
                 //     // removeEmployee();
@@ -92,11 +94,11 @@ async function viewEmployeesDepartment() {
     runSearch();
 };
 
-async function viewEmployeesManager() {
-    let employees = await db.employeesByManager();
-    console.table(employees);
-    runSearch();
-};
+// async function viewEmployeesManager() {
+//     let employees = await db.employeesByManager();
+//     console.table(employees);
+//     runSearch();
+// };
 
 async function viewDepartment() {
     let employees = await db.viewDepartment();
@@ -114,10 +116,26 @@ async function addDepartment() {
         console.log(department);
 
             let employees = await db.addDepartment(department);
-            console.log(employees.affectedRows + " department inserted.");
+            console.log(employees.affectedRows + " department added.");
             runSearch();
 
 };
+
+async function addRole() {
+    let role = await inquirer
+        .prompt({
+            name: 'title',
+            type: 'input',
+            message: 'Name of role:',
+        })
+        console.log(role);
+
+            let employees = await db.addRole(role);
+            console.log(employees.affectedRows + " role added.");
+            runSearch();
+
+};
+
 
 async function addEmployee() {
     let employee = await inquirer
