@@ -49,7 +49,7 @@ const runSearch = () => {
                     break;
 
                 case 'Update employee role':
-                    // updateEmployeeRole();
+                    updateEmployeeRole();
                     break;
 
                 // case 'View all employees by department':
@@ -154,6 +154,40 @@ async function addRole() {
 
 
 async function addEmployee() {
+    let employee = await inquirer
+        .prompt([
+            {
+                name: 'first_name',
+                type: 'input',
+                message: 'Employee First Name:',
+
+            },
+            {
+                name: 'last_name',
+                type: 'input',
+                message: 'Employee Last Name:',
+            },
+            {
+                name: 'role_id',
+                type: 'input',
+                message: 'Role ID:',
+            },
+            {
+                name: 'manager_id',
+                type: 'input',
+                message: 'Manager ID:',
+            }
+        ]);
+
+    console.log(employee);
+
+    let employees = await db.addEmployee(employee);
+    console.log(employees.affectedRows + " employee added.");
+    runSearch();
+
+};
+
+async function updateEmployeeRole() {
     let employee = await inquirer
         .prompt([
             {

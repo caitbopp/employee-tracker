@@ -40,6 +40,12 @@ class DB {
             "INSERT INTO employee SET ?", employee
         );
     }
+
+    updateEmployeeRole() {
+        return this.connection.query(
+
+        );
+    }
     
 };
 
