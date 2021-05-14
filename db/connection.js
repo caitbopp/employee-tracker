@@ -16,7 +16,7 @@ const connection = mysql.createConnection({
     database: 'employees',
   });
 
-// connection.connect();
+connection.connect();
 
 
 

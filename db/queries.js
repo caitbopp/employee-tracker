@@ -1,4 +1,4 @@
-const connection = require("/connection");
+const connection = require("./connection");
 
 class DB {
     constructor(connection) {
@@ -20,6 +20,18 @@ class DB {
     employeesByManager() {
         return this.connection.query(
             "SELECT CONCAT(manager.first_name, ' ', manager.last_name) AS manager department.name AS department, employee.id, employee.first_name, employee.last_name, role.title, FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;"
+        );
+    }
+
+    viewDepartment() {
+        return this.connection.query(
+            "SELECT * FROM department"
+        );
+    }
+
+    addDepartment(department) {
+        return this.connection.query(
+            "INSERT INTO department SET ?", department
         );
     }
 }
