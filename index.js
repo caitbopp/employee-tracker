@@ -155,11 +155,13 @@ async function addRole() {
 
 async function addEmployee() {
     let employee = await inquirer
-        .prompt({
-            name: 'first_name',
-            type: 'input',
-            message: 'Employee First Name:',
-        },
+        .prompt([
+            {
+                name: 'first_name',
+                type: 'input',
+                message: 'Employee First Name:',
+
+            },
             {
                 name: 'last_name',
                 type: 'input',
@@ -174,10 +176,12 @@ async function addEmployee() {
                 name: 'manager_id',
                 type: 'input',
                 message: 'Manager ID:',
-            })
+            }
+        ]);
+
     console.log(employee);
 
-    let employees = await db.addDepartment(employee);
+    let employees = await db.addEmployee(employee);
     console.log(employees.affectedRows + " employee added.");
     runSearch();
 
