@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
-// const { findAllEmployees, employeesByDepartment, employeesByManager } = require("./db/queries");
 const db = require("./db/queries");
 const connection = require("./db/connection");
+// const { employeesByManager } = require("./db/queries");
 
 
 // write some inquirer prompts
@@ -13,20 +13,25 @@ const runSearch = () => {
             message: 'What would you like to do?',
             choices: [
                 'View all employees',
+                'View all roles',
                 'View all employees by department',
-                'View all employees by manager',
+                // 'View all employees by manager',
                 'View all departments',
                 'Add department',
                 'Add employee',
-                'Remove employee',
+                // 'Remove employee',
                 'Update employee role',
-                'Update employee manager'
+                // 'Update employee manager'
             ],
         })
         .then((answer) => {
             switch (answer.action) {
                 case 'View all employees':
                     viewEmployees();
+                    break;
+
+                case 'View all roles':
+                    viewRoles();
                     break;
 
                 case 'View all employees by department':
@@ -46,16 +51,17 @@ const runSearch = () => {
                     break;
 
                 case 'Add employee':
-                    // addEmployee();
+                    addEmployee();
+                    break;
+                
+                case 'Update employee role':
+                    // updateEmployeeRole();
                     break;
 
                 // case 'Remove employee':
                 //     // removeEmployee();
                 //     break;
 
-                case 'Update employee role':
-                    // updateEmployeeRole();
-                    break;
 
                 // case 'Update employee manager':
                 //     // updateEmployeeManager();
@@ -71,6 +77,12 @@ const runSearch = () => {
 async function viewEmployees() {
     let employees = await db.findAllEmployees();
     console.table(employees);
+    runSearch();
+};
+
+async function viewRoles() {
+    let role = await db.viewRoles();
+    console.table(role);
     runSearch();
 };
 
@@ -103,6 +115,36 @@ async function addDepartment() {
 
             let employees = await db.addDepartment(department);
             console.log(employees.affectedRows + " department inserted.");
+            runSearch();
+
+};
+
+async function addEmployee() {
+    let employee = await inquirer
+        .prompt({
+            name: 'first_name',
+            type: 'input',
+            message: 'Employee First Name:',
+        },
+        {
+            name: 'last_name',
+            type: 'input',
+            message: 'Employee Last Name:',
+        },
+        {
+            name: 'role_id',
+            type: 'input',
+            message: 'Role ID:',
+        },
+        {
+            name: 'manager_id',
+            type: 'input',
+            message: 'Manager ID:',
+        })
+        console.log(employee);
+
+            let employees = await db.addDepartment(employee);
+            console.log(employees.affectedRows + " employee added.");
             runSearch();
 
 };
