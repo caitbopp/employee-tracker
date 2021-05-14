@@ -88,11 +88,11 @@ async function viewRoles() {
     runSearch();
 };
 
-async function viewEmployeesDepartment() {
-    let employees = await db.employeesByDepartment();
-    console.table(employees);
-    runSearch();
-};
+// async function viewEmployeesDepartment() {
+//     let employees = await db.employeesByDepartment();
+//     console.table(employees);
+//     runSearch();
+// };
 
 // async function viewEmployeesManager() {
 //     let employees = await db.employeesByManager();
