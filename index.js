@@ -1,10 +1,9 @@
 const inquirer = require("inquirer");
 const db = require("./db/queries");
 const connection = require("./db/connection");
-// const { employeesByManager } = require("./db/queries");
 
 
-// write some inquirer prompts
+// inquirer prompts
 const runSearch = () => {
     inquirer
         .prompt({
@@ -19,7 +18,6 @@ const runSearch = () => {
                 'Add role',
                 'Add employee',
                 'Update employee role',
-                // 'View all employees by department',
             ],
         })
         .then((answer) => {
@@ -52,23 +50,6 @@ const runSearch = () => {
                     updateEmployeeRole();
                     break;
 
-                // case 'View all employees by department':
-                //     viewEmployeesDepartment();
-                //     break;
-
-                // case 'View all employees by manager':
-                //     viewEmployeesManager();
-                //     break;
-
-                // case 'Remove employee':
-                //     // removeEmployee();
-                //     break;
-
-
-                // case 'Update employee manager':
-                //     // updateEmployeeManager();
-                //     break;
-
                 default:
                     console.log(`Invalid action: ${answer.action}`);
                     break;
@@ -88,17 +69,6 @@ async function viewRoles() {
     runSearch();
 };
 
-// async function viewEmployeesDepartment() {
-//     let employees = await db.employeesByDepartment();
-//     console.table(employees);
-//     runSearch();
-// };
-
-// async function viewEmployeesManager() {
-//     let employees = await db.employeesByManager();
-//     console.table(employees);
-//     runSearch();
-// };
 
 async function viewDepartment() {
     let employees = await db.viewDepartment();
@@ -187,38 +157,38 @@ async function addEmployee() {
 
 };
 
-async function updateEmployeeRole() {
-    let employee = await inquirer
-        .prompt([
-            {
-                name: 'first_name',
-                type: 'input',
-                message: 'Employee First Name:',
+// async function updateEmployeeRole() {
+//     let employee = await inquirer
+//         .prompt([
+//             {
+//                 name: 'first_name',
+//                 type: 'input',
+//                 message: 'Employee First Name:',
 
-            },
-            {
-                name: 'last_name',
-                type: 'input',
-                message: 'Employee Last Name:',
-            },
-            {
-                name: 'role_id',
-                type: 'input',
-                message: 'Role ID:',
-            },
-            {
-                name: 'manager_id',
-                type: 'input',
-                message: 'Manager ID:',
-            }
-        ]);
+//             },
+//             {
+//                 name: 'last_name',
+//                 type: 'input',
+//                 message: 'Employee Last Name:',
+//             },
+//             {
+//                 name: 'role_id',
+//                 type: 'input',
+//                 message: 'Role ID:',
+//             },
+//             {
+//                 name: 'manager_id',
+//                 type: 'input',
+//                 message: 'Manager ID:',
+//             }
+//         ]);
 
-    console.log(employee);
+//     console.log(employee);
 
-    let employees = await db.addEmployee(employee);
-    console.log(employees.affectedRows + " employee added.");
-    runSearch();
+//     let employees = await db.addEmployee(employee);
+//     console.log(employees.affectedRows + " employee added.");
+//     runSearch();
 
-};
+// };
 
 runSearch();

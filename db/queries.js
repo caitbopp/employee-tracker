@@ -49,16 +49,5 @@ class DB {
     
 };
 
-    // employeesByDepartment() {
-    //     return this.connection.query(
-    //         "SELECT department.name AS department, employee.id, employee.first_name, employee.last_name, role.title, FROM employee LEFT JOIN role ON (role.id = employee.role_id LEFT JOIN department on department_id = role.department_id LEFT JOIN employee manager on manager.id = employee.manager_id;"
-    //     );
-    // }
-
-    // employeesByManager() {
-    //     return this.connection.query(
-    //         "SELECT CONCAT(manager.first_name, ' ', manager.last_name) AS manager department.name AS department, employee.id, employee.first_name, employee.last_name, role.title, FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;"
-    //     );
-    // }
 
 module.exports = new DB(connection);
