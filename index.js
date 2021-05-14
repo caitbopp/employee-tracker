@@ -113,26 +113,42 @@ async function addDepartment() {
             type: 'input',
             message: 'What department would you like to add?',
         })
-        console.log(department);
+    console.log(department);
 
-            let employees = await db.addDepartment(department);
-            console.log(employees.affectedRows + " department added.");
-            runSearch();
+    let employees = await db.addDepartment(department);
+    console.log(employees.affectedRows + " department added.");
+    runSearch();
 
 };
 
 async function addRole() {
     let role = await inquirer
-        .prompt({
-            name: 'title',
-            type: 'input',
-            message: 'Name of role:',
-        })
-        console.log(role);
+        .prompt([
+            {
+                name: 'title',
+                type: 'input',
+                message: 'Name of role:',
 
-            let employees = await db.addRole(role);
-            console.log(employees.affectedRows + " role added.");
-            runSearch();
+            },
+            {
+                name: 'salary',
+                type: 'input',
+                message: 'What is the salary for this role?',
+
+            },
+            {
+                name: 'department_id',
+                type: 'input',
+                message: 'What is the department ID for this role?',
+
+            },
+        ]);
+
+    console.log(role);
+
+    let employees = await db.addRole(role);
+    console.log(employees.affectedRows + " role added.");
+    runSearch();
 
 };
 
@@ -144,26 +160,26 @@ async function addEmployee() {
             type: 'input',
             message: 'Employee First Name:',
         },
-        {
-            name: 'last_name',
-            type: 'input',
-            message: 'Employee Last Name:',
-        },
-        {
-            name: 'role_id',
-            type: 'input',
-            message: 'Role ID:',
-        },
-        {
-            name: 'manager_id',
-            type: 'input',
-            message: 'Manager ID:',
-        })
-        console.log(employee);
+            {
+                name: 'last_name',
+                type: 'input',
+                message: 'Employee Last Name:',
+            },
+            {
+                name: 'role_id',
+                type: 'input',
+                message: 'Role ID:',
+            },
+            {
+                name: 'manager_id',
+                type: 'input',
+                message: 'Manager ID:',
+            })
+    console.log(employee);
 
-            let employees = await db.addDepartment(employee);
-            console.log(employees.affectedRows + " employee added.");
-            runSearch();
+    let employees = await db.addDepartment(employee);
+    console.log(employees.affectedRows + " employee added.");
+    runSearch();
 
 };
 
